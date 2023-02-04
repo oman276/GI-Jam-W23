@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     // Start is called before the first frame update
     StageGenerator stageGenerator;
 
@@ -16,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     int player1Score = 0;
     int player2Score = 0;
+
+    string player1type;
+    string player2type;
 
     public GameObject[] player1images;
     public GameObject[] player2images;
@@ -103,4 +109,10 @@ public class GameManager : MonoBehaviour
             winnerPicked(2);
         }
     }
+
+    public void startGame()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
 }
+
