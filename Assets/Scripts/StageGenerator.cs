@@ -20,7 +20,7 @@ public class StageGenerator : MonoBehaviour
     List<List<Vector2>> spawnpoints;
 
     public GameObject stem;
-    public GameObject largeStem;
+    public GameObject rose;
     public GameObject barrier;
 
     public int minStems = 2;
@@ -68,7 +68,7 @@ public class StageGenerator : MonoBehaviour
         int row = Random.Range(0, rows);
         int col = Random.Range(0, columns);
         coordinateList.Add((col, row));
-        GameObject ls = Instantiate(largeStem, spawnpoints[row][col], Quaternion.identity);
+        GameObject ls = Instantiate(rose, spawnpoints[row][col], Quaternion.identity);
         activeObjects.Add(ls);
 
         int numOfStems = Random.Range(minStems, maxStems + 1);

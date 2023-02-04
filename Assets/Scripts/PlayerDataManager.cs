@@ -6,8 +6,8 @@ public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager instance;
 
-    string player1name = "";
-    string player2name = "";
+    public string player1name = "";
+    public string player2name = "";
 
     private void Awake()
     {

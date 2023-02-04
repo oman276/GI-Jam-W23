@@ -10,6 +10,6 @@ public class MenuController : MonoBehaviour
     }
 
     public void enterCharacterSelect() {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("CharacterSelect");
     }
 }

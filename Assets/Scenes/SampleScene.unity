@@ -1344,7 +1344,7 @@ MonoBehaviour:
   rows: 8
   columns: 10
   stem: {fileID: 974151363295117493, guid: 254b9123e8e9fa94d879618921d9d90e, type: 3}
-  largeStem: {fileID: 6031811107612896102, guid: 866900eaa2f1115468fdf1b1976571db, type: 3}
+  rose: {fileID: 5373466067832353695, guid: 7d45e6512d7bca14f859ea88eee6c70d, type: 3}
   barrier: {fileID: 1032398154476239174, guid: ac1ec8fa6aafc324d8d1646d975bb476, type: 3}
   minStems: 3
   maxStems: 7
