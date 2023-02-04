@@ -7,21 +7,16 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
 
-    // Start is called before the first frame update
     StageGenerator stageGenerator;
 
     public float roundLength = 5f;
-    float prevTime;
+    public float prevTime;
 
     public Slider timeSlider;
 
     int player1Score = 0;
     int player2Score = 0;
-
-    string player1type;
-    string player2type;
 
     public GameObject[] player1images;
     public GameObject[] player2images;
@@ -53,6 +48,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Time.time - prevTime >= roundLength) {
             stageGenerator.cycle();
             prevTime = Time.time;
@@ -77,10 +73,10 @@ public class GameManager : MonoBehaviour
     void winnerPicked(int winner) {
         if (winner == 1)
         {
-            endText.text = "Player 1 wins!";
+            endText.text = "Player One Wins!";
         }
         else {
-            endText.text = "Player 2 wins!";
+            endText.text = "Player Two Wins!";
         }
         Time.timeScale = 0;
         endScreen.SetActive(true);
@@ -112,7 +108,13 @@ public class GameManager : MonoBehaviour
 
     public void startGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("SampleScene");
+    }
+
+    public void BackToMenu() {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
     }
 }
 

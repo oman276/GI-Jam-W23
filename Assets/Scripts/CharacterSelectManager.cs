@@ -14,7 +14,7 @@ public class CharacterSelectManager : MonoBehaviour
     void Start()
     {
         pdm = FindObjectOfType<PlayerDataManager>();
-        mainText.text = "SELECT CHARACTER: Player 1";
+        mainText.text = "SELECT CHARACTER: Player One";
     }
 
     public void ObjectClicked(string name) {
@@ -22,7 +22,7 @@ public class CharacterSelectManager : MonoBehaviour
         {
             player1select = false;
             pdm.player1name = name;
-            mainText.text = "SELECT CHARACTER: Player 2";
+            mainText.text = "SELECT CHARACTER: Player Two";
         }
         else {
             pdm.player2name = name;
