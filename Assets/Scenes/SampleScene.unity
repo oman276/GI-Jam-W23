@@ -2798,6 +2798,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278007207}
   m_CullTransparentMesh: 1
+--- !u!1001 &1332182264
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4153283
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.31800577
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.07398091
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 33a6296b19b12a4418d8fb71ffca6422, type: 3}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: press
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245358, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
 --- !u!1 &1425497474
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,6 +4004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundLength: 15
+  prevTime: 0
   timeSlider: {fileID: 288777410}
   player1images:
   - {fileID: 2047196006}

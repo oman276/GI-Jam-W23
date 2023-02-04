@@ -8,13 +8,15 @@ public class CharacterSelectManager : MonoBehaviour
 {
     PlayerDataManager pdm;
     bool player1select = true;
-    public TextMeshProUGUI mainText; 
+    public TextMeshProUGUI mainText;
+    AudioManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         pdm = FindObjectOfType<PlayerDataManager>();
         mainText.text = "SELECT CHARACTER: Player One";
+        am = FindObjectOfType<AudioManager>();
     }
 
     public void ObjectClicked(string name) {
@@ -23,8 +25,10 @@ public class CharacterSelectManager : MonoBehaviour
             player1select = false;
             pdm.player1name = name;
             mainText.text = "SELECT CHARACTER: Player Two";
+            am.Play("press");
         }
         else {
+            am.Play("press");
             pdm.player2name = name;
             SceneManager.LoadScene("SampleScene");
         }

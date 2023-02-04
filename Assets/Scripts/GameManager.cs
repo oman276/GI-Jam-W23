@@ -26,8 +26,12 @@ public class GameManager : MonoBehaviour
     public GameObject endScreen;
     public TextMeshProUGUI endText;
 
+    AudioManager am;
+
     void Start()
     {
+        am = FindObjectOfType<AudioManager>();
+
         endScreen.SetActive(false);
 
         prevTime = Time.time;
@@ -108,11 +112,13 @@ public class GameManager : MonoBehaviour
 
     public void startGame()
     {
+        am.Play("press");
         Time.timeScale = 1;
         SceneManager.LoadScene("SampleScene");
     }
 
     public void BackToMenu() {
+        am.Play("press");
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
