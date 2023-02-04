@@ -11,10 +11,14 @@ public class GameManager : MonoBehaviour
     public float roundLength = 5f;
     float prevTime;
 
+    public Slider timeSlider;
+
     void Start()
     {
         prevTime = Time.time;
         stageGenerator = FindObjectOfType<StageGenerator>();
+        timeSlider.maxValue = roundLength;
+        timeSlider.value = roundLength;
     }
 
     // Update is called once per frame
@@ -24,5 +28,7 @@ public class GameManager : MonoBehaviour
             stageGenerator.cycle();
             prevTime = Time.time;
         }
+
+        timeSlider.value = roundLength - (Time.time - prevTime);
     }
 }
