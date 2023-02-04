@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,52 +23,11 @@ public class StageGenerator : MonoBehaviour
     public int minStems = 2;
     public int maxStems = 5;
 
-    class CoordinatePair {
-        public int first;
-        public int second;
-
-        public CoordinatePair(int _first, int _second) {
-            first = _first;
-            second = _second;
-        }
-
-        public bool Equals(CoordinatePair cp)
-        {
-            return this.first == cp.first && this.second == cp.second;
-        }
-
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         spawnpoints = new List<List<Vector2>>();
         GameObject empty = new GameObject();
-
-        CoordinatePair cp1 = new CoordinatePair(2, 4);
-        CoordinatePair cp2 = new CoordinatePair(2, 4);
-
-        if (cp1 == cp2)
-        {
-            print("cp1, cp2 equal");
-        }
-        else {
-            print("cp1, cp2 not equal");
-        }
-
-
-        CoordinatePair cp3 = new CoordinatePair(2, 4);
-        CoordinatePair cp4 = new CoordinatePair(2, 6);
-
-        if (cp3 == cp4)
-        {
-            print("cp3, cp4 equal");
-        }
-        else
-        {
-            print("cp3, cp4 not equal");
-        }
-
 
         topLeft = topLeftTrans.position;
         bottomLeft = bottomLeftTrans.position;
@@ -89,9 +49,21 @@ public class StageGenerator : MonoBehaviour
             }
         }
 
+        List<(int, int)> coordinateList = new List<(int, int)>();
+
         int numOfStems = Random.Range(minStems, maxStems + 1);
-        for (int i = 0; i < numOfStems; ++i) { 
-            
+        for (int i = 0; i < numOfStems; ++i) {
+            int row = Random.Range(0, rows);
+            int col = Random.Range(0, columns);
+
+            if (!coordinateList.Contains((col, row)))
+            {
+                coordinateList.Add((col, row));
+                Instantiate(stem, spawnpoints[row][col], Quaternion.identity);
+            }
+            else {
+                --i;
+            }
         }
     }
 

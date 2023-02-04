@@ -349,6 +349,8 @@ MonoBehaviour:
   rows: 8
   columns: 10
   stem: {fileID: 974151363295117493, guid: 254b9123e8e9fa94d879618921d9d90e, type: 3}
+  minStems: 3
+  maxStems: 7
 --- !u!4 &1014280091
 Transform:
   m_ObjectHideFlags: 0
