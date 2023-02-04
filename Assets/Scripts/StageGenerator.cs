@@ -20,12 +20,23 @@ public class StageGenerator : MonoBehaviour
     List<List<Vector2>> spawnpoints;
 
     public GameObject stem;
+    public GameObject largeStem;
+    public GameObject barrier;
+
     public int minStems = 2;
     public int maxStems = 5;
+
+    public int minBarriers = 4;
+    public int maxBarriers = 8;
+
+    List<(int, int)> coordinateList;
+    List<GameObject> activeObjects;
 
     // Start is called before the first frame update
     void Start()
     {
+        activeObjects = new List<GameObject>();
+
         spawnpoints = new List<List<Vector2>>();
         GameObject empty = new GameObject();
 
@@ -49,29 +60,71 @@ public class StageGenerator : MonoBehaviour
             }
         }
 
-        List<(int, int)> coordinateList = new List<(int, int)>();
+        generate();
+    }
+
+    void generate() {
+        coordinateList = new List<(int, int)>();
+        int row = Random.Range(0, rows);
+        int col = Random.Range(0, columns);
+        coordinateList.Add((col, row));
+        GameObject ls = Instantiate(largeStem, spawnpoints[row][col], Quaternion.identity);
+        activeObjects.Add(ls);
 
         int numOfStems = Random.Range(minStems, maxStems + 1);
-        for (int i = 0; i < numOfStems; ++i) {
-            int row = Random.Range(0, rows);
-            int col = Random.Range(0, columns);
+        for (int i = 0; i < numOfStems; ++i)
+        {
+            row = Random.Range(0, rows);
+            col = Random.Range(0, columns);
 
             if (!coordinateList.Contains((col, row)))
             {
                 coordinateList.Add((col, row));
-                Instantiate(stem, spawnpoints[row][col], Quaternion.identity);
+                GameObject s = Instantiate(stem, spawnpoints[row][col], Quaternion.identity);
+                activeObjects.Add(s);
             }
-            else {
+            else
+            {
                 --i;
             }
         }
+
+        int numOfBarriers = Random.Range(minBarriers, maxBarriers + 1);
+        for (int i = 0; i < numOfBarriers; ++i)
+        {
+            row = Random.Range(0, rows);
+            col = Random.Range(0, columns);
+
+            if (!coordinateList.Contains((col, row)))
+            {
+                coordinateList.Add((col, row));
+                GameObject b = Instantiate(barrier, spawnpoints[row][col], Quaternion.identity);
+                activeObjects.Add(b);
+            }
+            else
+            {
+                --i;
+            }
+        }
+    }
+
+    void wipe() {
+        foreach (GameObject g in activeObjects) {
+            Destroy(g);
+        }
+        activeObjects.Clear();
+    }
+
+    public void cycle() {
+        wipe();
+        generate();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            cycle();
         }
     }
 }
