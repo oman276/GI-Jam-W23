@@ -3,24 +3,23 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
-    float speed = 9;
-
-    [SerializeField, Tooltip("Acceleration while grounded.")]
-    float walkAcceleration = 75;
-
-    [SerializeField, Tooltip("Acceleration while in the air.")]
-    float airAcceleration = 30;
-
-    [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
-    float groundDeceleration = 70;
-
-    [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
-    float jumpHeight = 4;
 
     private BoxCollider2D boxCollider;
+    Rigidbody2D rb;
 
     private Vector2 velocity;
+    Vector2 lastVec;
+
+    GameObject activeStem = null;
+
+    bool objectHeld = false;
+    public GameObject heldCarrot;
+    public GameObject thrownCarrot;
+
+    public float spawnDistance = 0.3f;
+    public float throwForce = 10f;
+
+    StageGenerator sg;
 
     /// <summary>
     /// Set to true when the character intersects a collider beneath
@@ -28,69 +27,66 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private bool grounded;
 
+
+    public bool player1 = true;
+
+
     private void Awake()
     {      
         boxCollider = GetComponent<BoxCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        heldCarrot.SetActive(false);
+        sg = FindObjectOfType<StageGenerator>();
     }
 
     private void Update()
     {
-        // Use GetAxisRaw to ensure our input is either 0, 1 or -1.
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        // MOVEMENT
+        float moveInputX = Input.GetAxisRaw("Horizontal");
+        float moveInputY = Input.GetAxisRaw("Vertical");
 
-        if (grounded)
-        {
-            velocity.y = 0;
+        velocity.x = moveInputX * speed * Time.deltaTime;
+        velocity.y = moveInputY * speed * Time.deltaTime;
 
-            if (Input.GetButtonDown("Jump"))
+        rb.velocity = velocity;
+        if (velocity != Vector2.zero) {
+            lastVec = velocity;
+        }
+
+
+        //ITEM GRAB/THROW
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E)) {
+            if (activeStem && !objectHeld) {
+                Destroy(activeStem);
+                objectHeld = true;
+                heldCarrot.SetActive(true);
+            }
+            else if (objectHeld)
             {
-                // Calculate the velocity required to achieve the target jump height.
-                velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+                objectHeld = false;
+                heldCarrot.SetActive(false);
+
+                Vector2 spawnPos = new Vector2(this.transform.position.x, this.transform.position.y) + 
+                    (lastVec.normalized * spawnDistance);
+                GameObject tc = Instantiate(thrownCarrot, spawnPos, Quaternion.identity);
+                tc.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * throwForce);
+                sg.activeObjects.Add(tc);
             }
         }
+    }
 
-        float acceleration = grounded ? walkAcceleration : airAcceleration;
-        float deceleration = grounded ? groundDeceleration : 0;
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print(collision.gameObject.tag);
+    }
 
-        if (moveInput != 0)
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
-        }
-        else
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
-        }
-
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
-
-        transform.Translate(velocity * Time.deltaTime);
-
-        grounded = false;
-
-        // Retrieve all colliders we have intersected after velocity has been applied.
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
-
-        foreach (Collider2D hit in hits)
-        {
-            // Ignore our own collider.
-            if (hit == boxCollider)
-                continue;
-
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-
-            // Ensure that we are still overlapping this collider.
-            // The overlap may no longer exist due to another intersected collider
-            // pushing us out of this one.
-            if (colliderDistance.isOverlapped)
-            {
-                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-
-                // If we intersect an object beneath us, set grounded to true. 
-                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-                {
-                    grounded = true;
-                }
-            }
+    public void getStem(GameObject s) {
+        activeStem = s;
+    }
+    public void dropStem(GameObject s)
+    {
+        if (activeStem == s) {
+            activeStem = null;
         }
     }
 }
