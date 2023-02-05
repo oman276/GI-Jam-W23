@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play Again
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
+  m_sharedMaterial: {fileID: 580833939416680515, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 34.85
+  m_fontSizeBase: 34.85
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -394,8 +394,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
+  m_sharedMaterial: {fileID: 580833939416680515, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -419,8 +419,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 34.85
+  m_fontSizeBase: 34.85
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1514,7 +1514,7 @@ MonoBehaviour:
   rows: 8
   columns: 10
   stem: {fileID: 974151363295117493, guid: 254b9123e8e9fa94d879618921d9d90e, type: 3}
-  largeStem: {fileID: 6031811107612896102, guid: 866900eaa2f1115468fdf1b1976571db, type: 3}
+  rose: {fileID: 5373466067832353695, guid: 7d45e6512d7bca14f859ea88eee6c70d, type: 3}
   barrier: {fileID: 1032398154476239174, guid: ac1ec8fa6aafc324d8d1646d975bb476, type: 3}
   minStems: 3
   maxStems: 7
@@ -2968,6 +2968,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278007207}
   m_CullTransparentMesh: 1
+--- !u!1001 &1332182264
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4153283
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.31800577
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.07398091
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245352, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 33a6296b19b12a4418d8fb71ffca6422, type: 3}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: press
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245353, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155950758172245358, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edeff655d3c85024c8fbfcce64d0f969, type: 3}
 --- !u!1 &1425497474
 GameObject:
   m_ObjectHideFlags: 0
@@ -3195,10 +3276,10 @@ RectTransform:
   m_Father: {fileID: 2001094284}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 48.778236}
-  m_SizeDelta: {x: 346.2175, y: 79.2435}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0.00048828125, y: 32.35343}
+  m_SizeDelta: {x: 0.0009, y: 112.0931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1630688012
 MonoBehaviour:
@@ -3220,10 +3301,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player 1 Wins!
+  m_text: Player One Wins!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
+  m_sharedMaterial: {fileID: 580833939416680515, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3247,8 +3328,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.62
-  m_fontSizeBase: 51.62
+  m_fontSize: 94.2
+  m_fontSizeBase: 94.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3380,7 +3461,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1673979596}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2024932651}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BackToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1673979596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3502,7 +3595,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1715603804}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2024932651}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: startGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1715603804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4069,6 +4174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundLength: 15
+  prevTime: 0
   timeSlider: {fileID: 288777410}
   player1images:
   - {fileID: 2047196006}
