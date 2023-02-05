@@ -65,11 +65,13 @@ public class StageGenerator : MonoBehaviour
 
     void generate() {
         coordinateList = new List<(int, int)>();
-        int row = Random.Range(0, rows);
-        int col = Random.Range(0, columns);
+        
+        
+        int row = Random.Range(1, rows-1);
+        int col = Random.Range(1, columns-1);
         coordinateList.Add((col, row));
-        GameObject ls = Instantiate(rose, spawnpoints[row][col], Quaternion.identity);
-        activeObjects.Add(ls);
+        GameObject r = Instantiate(rose, spawnpoints[row][col], Quaternion.identity);
+        activeObjects.Add(r);
 
         int numOfStems = Random.Range(minStems, maxStems + 1);
         for (int i = 0; i < numOfStems; ++i)
@@ -118,13 +120,5 @@ public class StageGenerator : MonoBehaviour
     public void cycle() {
         wipe();
         generate();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            cycle();
-        }
     }
 }

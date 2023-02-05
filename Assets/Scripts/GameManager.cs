@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI endText;
 
     AudioManager am;
-
     void Start()
     {
         am = FindObjectOfType<AudioManager>();
@@ -59,19 +58,6 @@ public class GameManager : MonoBehaviour
         }
 
         timeSlider.value = roundLength - (Time.time - prevTime);
-
-        if (gameActive)
-        {
-            //DEBUG - REMOVE FOR FINAL BUILD
-            if (Input.GetKeyDown(KeyCode.V))
-            {
-                pluckedby1();
-            }
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                pluckedby2();
-            }
-        }
     }
 
     void winnerPicked(int winner) {
