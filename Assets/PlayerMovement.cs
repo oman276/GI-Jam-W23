@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 25f;
+    public float moveSpeed = 110f;
 
-    float moveLimiter = 2f;
+    float moveLimiter = 0.7f;
 
     public Rigidbody2D rb;
 
@@ -28,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.magnitude);
 
-
         
     }
 
@@ -41,6 +40,6 @@ public class PlayerMovement : MonoBehaviour
                 movement.y *= moveLimiter;
             } 
 
-            rb.velocity = movement;
+            rb.velocity = movement * moveSpeed * Time.fixedDeltaTime;
     }
 }
