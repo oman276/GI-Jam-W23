@@ -1,45 +1,92 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 110f;
 
-    float moveLimiter = 0.7f;
+    private BoxCollider2D boxCollider;
+    Rigidbody2D rb;
 
-    public Rigidbody2D rb;
+    private Vector2 velocity;
+    Vector2 lastVec;
 
-    public Animator animator;
+    GameObject activeStem = null;
 
-    Vector2 movement;
+    bool objectHeld = false;
+    public GameObject heldCarrot;
+    public GameObject thrownCarrot;
 
-    void Start ()
-    {
-    rb = GetComponent<Rigidbody2D>();
+    public float spawnDistance = 0.3f;
+    public float throwForce = 10f;
+
+    StageGenerator sg;
+
+    /// <summary>
+    /// Set to true when the character intersects a collider beneath
+    /// them in the previous frame.
+    /// </summary>
+    private bool grounded;
+
+
+    public bool player1 = true;
+
+
+    private void Awake()
+    {      
+        boxCollider = GetComponent<BoxCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        heldCarrot.SetActive(false);
+        sg = FindObjectOfType<StageGenerator>();
     }
 
-    void Update()
+    private void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        // MOVEMENT
+        float moveInputX = Input.GetAxisRaw("Horizontal");
+        float moveInputY = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.magnitude);
+        velocity.x = moveInputX * speed * Time.deltaTime;
+        velocity.y = moveInputY * speed * Time.deltaTime;
 
-        
-    }
+        rb.velocity = velocity;
+        if (velocity != Vector2.zero) {
+            lastVec = velocity;
+        }
 
-    void FixedUpdate() {
-            
-            if (movement.x != 0 && movement.y != 0) // Check for diagonal movement
+
+        //ITEM GRAB/THROW
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E)) {
+            if (activeStem && !objectHeld) {
+                Destroy(activeStem);
+                objectHeld = true;
+                heldCarrot.SetActive(true);
+            }
+            else if (objectHeld)
             {
-                // limit movement speed diagonally, so you move at 70% speed
-                movement.x *= moveLimiter;
-                movement.y *= moveLimiter;
-            } 
+                objectHeld = false;
+                heldCarrot.SetActive(false);
 
-            rb.velocity = movement * moveSpeed * Time.fixedDeltaTime;
+                Vector2 spawnPos = new Vector2(this.transform.position.x, this.transform.position.y) + 
+                    (lastVec.normalized * spawnDistance);
+                GameObject tc = Instantiate(thrownCarrot, spawnPos, Quaternion.identity);
+                tc.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * throwForce);
+                sg.activeObjects.Add(tc);
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print(collision.gameObject.tag);
+    }
+
+    public void getStem(GameObject s) {
+        activeStem = s;
+    }
+    public void dropStem(GameObject s)
+    {
+        if (activeStem == s) {
+            activeStem = null;
+        }
     }
 }

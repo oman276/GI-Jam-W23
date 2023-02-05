@@ -30,7 +30,7 @@ public class StageGenerator : MonoBehaviour
     public int maxBarriers = 8;
 
     List<(int, int)> coordinateList;
-    List<GameObject> activeObjects;
+    public List<GameObject> activeObjects;
 
     // Start is called before the first frame update
     void Start()
