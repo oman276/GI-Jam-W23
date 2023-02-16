@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
@@ -18,6 +19,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float spawnDistance = 0.3f;
     public float throwForce = 10f;
+
+    public LayerMask playerMask;
+    public float pushDistance = 0.3f;
+    public float pushRadius = 0.5f;
+    public float pushforce = 5f;
+    public float pushDelay = 0.15f;
 
     public float speed = 200f;
 
@@ -41,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     Rose currentRose;
 
+    bool movementEnabled = true;
+
     /// <summary>
     /// Set to true when the character intersects a collider beneath
     /// them in the previous frame.
@@ -51,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     string hAxis;
     string vAxis;
 
-    bool grabbool() {
+    bool pressbool() {
         if (player1)
         {
             return Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E);
@@ -103,19 +112,22 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", movement.magnitude);
 
         // ITEM GRAB/THROW
-        if (grabbool())
+        if (pressbool())
         {
+            //If standing next to a rose, grab the rose
             if (activeRose)
             {
                 roseStartTime = Time.time;
                 currentRose.timer.value = roseDelay;
             }
+            //Otherwise, if standing next to a stem amd not holding a carrot
             else if (activeStem && !objectHeld)
             {
                 Destroy(activeStem);
                 objectHeld = true;
                 heldCarrot.SetActive(true);
             }
+            //Otherwise, if an object is held, throw it
             else if (objectHeld)
             {
                 objectHeld = false;
@@ -126,6 +138,16 @@ public class PlayerMovement : MonoBehaviour
                 GameObject tc = Instantiate(thrownCarrot, spawnPos, Quaternion.identity);
                 tc.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * throwForce);
                 sg.activeObjects.Add(tc);
+            }
+            //Otherwise, check to punch
+            else {
+                Vector2 checkPos = new Vector2(this.transform.position.x, this.transform.position.y - 0.05f) +
+                    (lastVec.normalized * pushDistance);
+                Collider2D result = Physics2D.OverlapCircle(checkPos, pushRadius, playerMask);
+                if (result) {
+                    result.gameObject.GetComponent<PlayerMovement>().StartCoroutine("RestrictMovement");
+                    result.gameObject.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * pushforce);
+                }
             }
         }
 
@@ -166,7 +188,10 @@ public class PlayerMovement : MonoBehaviour
             movement.y *= moveLimiter;
         }
 
-        rb.velocity = movement * moveSpeed * Time.fixedDeltaTime;
+        if (movementEnabled)
+        {
+            rb.velocity = movement * moveSpeed * Time.fixedDeltaTime;
+        }
 
         if (movement != Vector2.zero)
         {
@@ -174,9 +199,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public IEnumerator RestrictMovement()
     {
-        print(collision.gameObject.tag);
+        movementEnabled = false;
+        yield return new WaitForSeconds(pushDelay);
+        movementEnabled = true;
     }
 
     public void getStem(GameObject s) {

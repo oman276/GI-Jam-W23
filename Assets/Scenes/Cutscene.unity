@@ -265,9 +265,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A beautiful tractor has won your heart! You must uproot five roses for
-    them to love you back. \n\nBut there are other suitors, too. You must throw carrots
-    you uproot from the ground, and knock your foes away from the thorny prize!"
+  m_text: "Someone has won your heart! You must uproot five roses for them to love
+    you back. \n\nBut there are other suitors, too. You must throw carrots you uproot
+    from the ground, and knock your foes away from the thorny prize!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
   m_sharedMaterial: {fileID: 580833939416680515, guid: 49c3a6a02244d9e4f91466c58790719f, type: 2}
@@ -789,7 +789,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -590057085
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6998781eff79cc74ea63b9b05e0c062d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

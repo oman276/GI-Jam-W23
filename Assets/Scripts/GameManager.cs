@@ -98,13 +98,13 @@ public class GameManager : MonoBehaviour
 
     public void startGame()
     {
-        am.Play("press");
+        //am.Play("press");
         Time.timeScale = 1;
         SceneManager.LoadScene("SampleScene");
     }
 
     public void BackToMenu() {
-        am.Play("press");
+        //am.Play("press");
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
