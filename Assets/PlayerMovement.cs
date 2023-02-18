@@ -117,12 +117,14 @@ public class PlayerMovement : MonoBehaviour
             //If standing next to a rose, grab the rose
             if (activeRose)
             {
+                FindObjectOfType<AudioManager>().Play("rose pull");
                 roseStartTime = Time.time;
                 currentRose.timer.value = roseDelay;
             }
             //Otherwise, if standing next to a stem amd not holding a carrot
             else if (activeStem && !objectHeld)
             {
+                FindObjectOfType<AudioManager>().Play("carrot pickup");
                 Destroy(activeStem);
                 objectHeld = true;
                 heldCarrot.SetActive(true);
@@ -130,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
             //Otherwise, if an object is held, throw it
             else if (objectHeld)
             {
+                FindObjectOfType<AudioManager>().Play("throw");
+
                 objectHeld = false;
                 heldCarrot.SetActive(false);
 
@@ -145,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
                     (lastVec.normalized * pushDistance);
                 Collider2D result = Physics2D.OverlapCircle(checkPos, pushRadius, playerMask);
                 if (result) {
+                    FindObjectOfType<AudioManager>().Play("melee");
                     result.gameObject.GetComponent<PlayerMovement>().StartCoroutine("RestrictMovement");
                     result.gameObject.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * pushforce);
                 }
@@ -175,7 +180,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         else if (holdbool() && !activeRose) {
+            FindObjectOfType<AudioManager>().Stop("rose pull");
             roseStartTime = Time.time;
+        }
+
+        if (!holdbool() && activeRose) {
+            FindObjectOfType<AudioManager>().Stop("rose pull");
         }
     }
 

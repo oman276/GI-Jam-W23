@@ -118,6 +118,7 @@ public class StageGenerator : MonoBehaviour
     }
 
     public void cycle() {
+        FindObjectOfType<AudioManager>().Play("round over");
         wipe();
         generate();
     }
