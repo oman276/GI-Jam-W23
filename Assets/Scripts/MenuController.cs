@@ -19,6 +19,6 @@ public class MenuController : MonoBehaviour
 
     public void enterCharacterSelect() {
         FindObjectOfType<AudioManager>().Play("press");
-        SceneManager.LoadScene("CharacterSelect");
+        SceneManager.LoadScene("Tutorial");
     }
 }

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] player1images;
     public GameObject[] player2images;
 
-    bool gameActive = true;
+    //bool gameActive = true;
 
     public GameObject endScreen;
     public TextMeshProUGUI endText;
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         }
         Time.timeScale = 0;
         endScreen.SetActive(true);
-        gameActive = false;
+        //gameActive = false;
     }
 
     public void pluckedby1() {

@@ -50,6 +50,9 @@ public class PlayerMovement : MonoBehaviour
 
     bool movementEnabled = true;
 
+    TutorialManager tm;
+    //public bool tutorialActive = false;
+
     /// <summary>
     /// Set to true when the character intersects a collider beneath
     /// them in the previous frame.
@@ -99,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
             hAxis = "Horizontal 2";
             vAxis = "Vertical 2";
         }
+
+        tm = FindObjectOfType<TutorialManager>();
     }
 
     private void Update()
@@ -110,6 +115,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.magnitude);
+
+        if (tm && (movement.x != 0 || movement.y != 0)) {
+            tm.WASDactivated(player1);
+        }
 
         // ITEM GRAB/THROW
         if (pressbool())
@@ -128,23 +137,37 @@ public class PlayerMovement : MonoBehaviour
                 Destroy(activeStem);
                 objectHeld = true;
                 heldCarrot.SetActive(true);
+                if (tm) {
+                    tm.stemActivated(player1);
+                }
             }
             //Otherwise, if an object is held, throw it
             else if (objectHeld)
             {
-                FindObjectOfType<AudioManager>().Play("throw");
+                if (!tm || tm.stage >= 4)
+                {
+                    FindObjectOfType<AudioManager>().Play("throw");
 
-                objectHeld = false;
-                heldCarrot.SetActive(false);
+                    if (tm) {
+                        tm.throwActivated(player1);
+                    }
 
-                Vector2 spawnPos = new Vector2(this.transform.position.x, this.transform.position.y) +
-                    (lastVec.normalized * spawnDistance);
-                GameObject tc = Instantiate(thrownCarrot, spawnPos, Quaternion.identity);
-                tc.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * throwForce);
-                sg.activeObjects.Add(tc);
+                    objectHeld = false;
+                    heldCarrot.SetActive(false);
+
+                    Vector2 spawnPos = new Vector2(this.transform.position.x, this.transform.position.y) +
+                        (lastVec.normalized * spawnDistance);
+                    GameObject tc = Instantiate(thrownCarrot, spawnPos, Quaternion.identity);
+                    tc.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * throwForce);
+                    if (sg) {
+                        sg.activeObjects.Add(tc);
+                    }
+                    
+                }
             }
             //Otherwise, check to punch
             else {
+           
                 Vector2 checkPos = new Vector2(this.transform.position.x, this.transform.position.y - 0.05f) +
                     (lastVec.normalized * pushDistance);
                 Collider2D result = Physics2D.OverlapCircle(checkPos, pushRadius, playerMask);
@@ -152,6 +175,11 @@ public class PlayerMovement : MonoBehaviour
                     FindObjectOfType<AudioManager>().Play("melee");
                     result.gameObject.GetComponent<PlayerMovement>().StartCoroutine("RestrictMovement");
                     result.gameObject.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * pushforce);
+
+                    if (tm)
+                    {
+                        tm.meleeActivated(player1);
+                    }
                 }
             }
         }
@@ -166,17 +194,26 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Time.time - roseStartTime >= roseDelay)
             {
-                if (player1)
+                if (tm)
                 {
-                    gm.pluckedby1();
+                    FindObjectOfType<AudioManager>().Play("round win");
+                    currentRose.gameObject.SetActive(false);
+                    tm.roseActivated(player1);
                 }
                 else
                 {
-                    gm.pluckedby2();
+                    if (player1)
+                    {
+                        gm.pluckedby1();
+                    }
+                    else
+                    {
+                        gm.pluckedby2();
+                    }
+                    sg.cycle();
+                    activeRose = false;
+                    gm.prevTime = Time.time;
                 }
-                sg.cycle();
-                activeRose = false;
-                gm.prevTime = Time.time;
             }
         }
         else if (holdbool() && !activeRose) {
