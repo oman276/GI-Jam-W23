@@ -5,6 +5,8 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
+    public bool spawnCondition = false;
+    public GameObject playerObj;
     private BoxCollider2D boxCollider;
     //Rigidbody2D rb;
 
@@ -20,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public float spawnDistance = 0.3f;
     public float throwForce = 10f;
 
+    public GameObject makeSlash;
+    
     public LayerMask playerMask;
     public float pushDistance = 0.3f;
     public float pushRadius = 0.5f;
@@ -87,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         heldCarrot.SetActive(false);
+        makeSlash.SetActive(false);
         sg = FindObjectOfType<StageGenerator>();
         gm = FindObjectOfType<GameManager>();
         
@@ -137,6 +142,25 @@ public class PlayerMovement : MonoBehaviour
                     (lastVec.normalized * spawnDistance);
                 GameObject tc = Instantiate(thrownCarrot, spawnPos, Quaternion.identity);
                 tc.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * throwForce);
+
+                Vector2 carrotvec = tc.transform.position;
+                // move carrot if out of bounds
+                if(tc.transform.position.x > 7.6F) {
+                    carrotvec.x = 7.6F;
+                    tc.transform.position = carrotvec;
+                } else if(tc.transform.position.x < -7.51F) {
+                    carrotvec.x = -7.51F;
+                    tc.transform.position = carrotvec;
+                }
+
+                if(tc.transform.position.y > 4.14F) {
+                    carrotvec.y = 4.14F;
+                    tc.transform.position = carrotvec;
+                } else if(tc.transform.position.y < -3.84F) {
+                    carrotvec.y = -3.84F;
+                    tc.transform.position = carrotvec;
+                }
+
                 sg.activeObjects.Add(tc);
             }
             //Otherwise, check to punch
@@ -147,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
                 if (result) {
                     result.gameObject.GetComponent<PlayerMovement>().StartCoroutine("RestrictMovement");
                     result.gameObject.GetComponent<Rigidbody2D>().AddForce(lastVec.normalized * pushforce);
+                    result.gameObject.GetComponent<PlayerMovement>().StartCoroutine("playPushWait");
                 }
             }
         }
@@ -177,10 +202,37 @@ public class PlayerMovement : MonoBehaviour
         else if (holdbool() && !activeRose) {
             roseStartTime = Time.time;
         }
+
+        Vector2 p = playerObj.transform.position;
+        // move player if out of bounds
+        if(playerObj.transform.position.x > 7.606092F) {
+            p.x = 7.606092F;
+            playerObj.transform.position = p;
+        } else if(playerObj.transform.position.x < -7.562734F) {
+            p.x = -7.562734F;
+            playerObj.transform.position = p;
+        }
+
+        if(playerObj.transform.position.y > 3.54686F) {
+            p.y = 3.54686F;
+            playerObj.transform.position = p;
+        } else if(playerObj.transform.position.y < -3.250088F) {
+            p.y = -3.250088F;
+            playerObj.transform.position = p;
+        }
     }
+
+    public IEnumerator playPushWait()
+    {
+        makeSlash.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        makeSlash.SetActive(false);
+    }
+
 
     void FixedUpdate()
     {
+
         if (movement.x != 0 && movement.y != 0) // Check for diagonal movement
         {
             // limit movement speed diagonally, so you move at 70% speed
@@ -197,6 +249,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lastVec = movement;
         }
+
     }
 
     public IEnumerator RestrictMovement()
