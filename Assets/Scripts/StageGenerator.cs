@@ -129,8 +129,6 @@ public class StageGenerator : MonoBehaviour
             distanceOne = Vector2.Distance(playerObj1.transform.position, spawnpoints[row][col]);
             distanceTwo = Vector2.Distance(playerObj2.transform.position, spawnpoints[row][col]);
 
-            Debug.Log(distanceOne + " " + distanceTwo);
-
             int temp = 0;
 
             while(distanceOne <= 1.5f || distanceTwo <= 1.5f )
@@ -163,6 +161,7 @@ public class StageGenerator : MonoBehaviour
     }
 
     public void cycle() {
+        FindObjectOfType<AudioManager>().Play("round over");
         wipe();
         generate();
     }

@@ -51,12 +51,12 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void StopPlaying(string name)
+    public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
-            print("Sound " + name + "not found");
+            print("Sound " + name + " not found");
             return;
         }
         s.source.Stop();

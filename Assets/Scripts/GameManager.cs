@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] player1images;
     public GameObject[] player2images;
 
-    bool gameActive = true;
+    //bool gameActive = true;
 
     public GameObject endScreen;
     public TextMeshProUGUI endText;
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     }
 
     void winnerPicked(int winner) {
+        FindObjectOfType<AudioManager>().Play("game win");
         if (winner == 1)
         {
             endText.text = "Player One Wins!";
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
         }
         Time.timeScale = 0;
         endScreen.SetActive(true);
-        gameActive = false;
+        //gameActive = false;
     }
 
     public void pluckedby1() {
@@ -79,8 +80,12 @@ public class GameManager : MonoBehaviour
         {
             player1images[i].SetActive(true);
         }
-        if (player1Score == 5) {
+        if (player1Score == 5)
+        {
             winnerPicked(1);
+        }
+        else {
+            FindObjectOfType<AudioManager>().Play("round win");
         }
     }
     
@@ -94,17 +99,20 @@ public class GameManager : MonoBehaviour
         {
             winnerPicked(2);
         }
+        else {
+            FindObjectOfType<AudioManager>().Play("round win");
+        }
     }
 
     public void startGame()
     {
-        //am.Play("press");
+        FindObjectOfType<AudioManager>().Play("press");
         Time.timeScale = 1;
         SceneManager.LoadScene("SampleScene");
     }
 
     public void BackToMenu() {
-        //am.Play("press");
+        FindObjectOfType<AudioManager>().Play("press");
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }

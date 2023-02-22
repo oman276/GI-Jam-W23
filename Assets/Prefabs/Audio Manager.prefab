@@ -47,13 +47,61 @@ MonoBehaviour:
   sounds:
   - name: theme
     clip: {fileID: 8300000, guid: 4703bc4dca52c6743a83999804b76bf6, type: 3}
-    volume: 0.3
+    volume: 0.15
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: press
     clip: {fileID: 8300000, guid: 33a6296b19b12a4418d8fb71ffca6422, type: 3}
     volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: carrot impact
+    clip: {fileID: 8300000, guid: df19ecf5a6ed0ea4684f770058112430, type: 3}
+    volume: 1
+    pitch: 0.81
+    loop: 0
+    source: {fileID: 0}
+  - name: carrot pickup
+    clip: {fileID: 8300000, guid: 01a8d947cf4efd9499a22dde1cd362cb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: game win
+    clip: {fileID: 8300000, guid: e97aa7c5585a8034facd1854524170b1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: melee
+    clip: {fileID: 8300000, guid: b332ec37a470eca4d866f3095a24dee4, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: rose pull
+    clip: {fileID: 8300000, guid: 010b9871f4668c4459b94977ea8cd61a, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: throw
+    clip: {fileID: 8300000, guid: 3a0e71042e4ab1b42b1f665b9158e27f, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: round win
+    clip: {fileID: 8300000, guid: 4ae0759a26f9df94bb2cb9e83a19ed62, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: round over
+    clip: {fileID: 8300000, guid: 0669e16891daa844db96073fb0482757, type: 3}
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
