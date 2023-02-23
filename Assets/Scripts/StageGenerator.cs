@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StageGenerator : MonoBehaviour
 {
+
+
+    public GameObject playerObj1;
+    public GameObject playerObj2;
+
     public Transform topLeftTrans;
     public Transform bottomLeftTrans;
     public Transform topRightTrans;
@@ -29,12 +35,19 @@ public class StageGenerator : MonoBehaviour
     public int minBarriers = 4;
     public int maxBarriers = 8;
 
+
+    public BoxCollider2D playeroneCollider;
+    public BoxCollider2D playertwoCollider;
+
+    public BoxCollider2D roseCollider;
+
     List<(int, int)> coordinateList;
     public List<GameObject> activeObjects;
 
     // Start is called before the first frame update
     void Start()
     {
+
         activeObjects = new List<GameObject>();
 
         spawnpoints = new List<List<Vector2>>();
@@ -65,13 +78,29 @@ public class StageGenerator : MonoBehaviour
 
     void generate() {
         coordinateList = new List<(int, int)>();
-        
+
         
         int row = Random.Range(1, rows-1);
         int col = Random.Range(1, columns-1);
         coordinateList.Add((col, row));
+
+        float distanceOne = Vector2.Distance(playerObj1.transform.position, spawnpoints[row][col]);
+        float distanceTwo = Vector2.Distance(playerObj2.transform.position, spawnpoints[row][col]);
+
+        while(distanceOne <= 2.0f || distanceTwo <= 2.0f)
+        {
+            coordinateList.Remove((col, row));
+            row = Random.Range(1, rows-1);
+            col = Random.Range(1, columns-1);  
+            coordinateList.Add((col, row));
+            distanceOne = Vector2.Distance(playerObj1.transform.position, spawnpoints[row][col]);
+            distanceTwo = Vector2.Distance(playerObj2.transform.position, spawnpoints[row][col]);
+        }
+
         GameObject r = Instantiate(rose, spawnpoints[row][col], Quaternion.identity);
+
         activeObjects.Add(r);
+
 
         int numOfStems = Random.Range(minStems, maxStems + 1);
         for (int i = 0; i < numOfStems; ++i)
@@ -96,6 +125,20 @@ public class StageGenerator : MonoBehaviour
         {
             row = Random.Range(0, rows);
             col = Random.Range(0, columns);
+
+            distanceOne = Vector2.Distance(playerObj1.transform.position, spawnpoints[row][col]);
+            distanceTwo = Vector2.Distance(playerObj2.transform.position, spawnpoints[row][col]);
+
+            int temp = 0;
+
+            while(distanceOne <= 1.5f || distanceTwo <= 1.5f )
+            {
+                temp++;
+                row = Random.Range(0, rows);
+                col = Random.Range(0, columns);
+                distanceOne = Vector2.Distance(playerObj1.transform.position, spawnpoints[row][col]);
+                distanceTwo = Vector2.Distance(playerObj2.transform.position, spawnpoints[row][col]);
+            }
 
             if (!coordinateList.Contains((col, row)))
             {
@@ -122,4 +165,5 @@ public class StageGenerator : MonoBehaviour
         wipe();
         generate();
     }
+
 }
