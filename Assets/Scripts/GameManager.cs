@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour
     }
 
     void winnerPicked(int winner) {
-        FindObjectOfType<AudioManager>().Play("game win");
+        FindObjectOfType<AudioManager>().Stop("theme");
+        
         if (winner == 1)
         {
             endScreenPlayer.whichplayer = 1;
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
         endScreen.SetActive(true);
         endScreenPlayer.isGameOver = true;
         //gameActive = false;
+        SceneManager.LoadScene("EndCutscene");
     }
 
     public void pluckedby1() {
