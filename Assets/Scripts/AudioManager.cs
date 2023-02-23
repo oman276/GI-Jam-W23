@@ -33,12 +33,10 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
 
         }
-    }
 
-    private void Start()
-    {
         Play("theme");
     }
+
 
     public void Play(string name)
     {
