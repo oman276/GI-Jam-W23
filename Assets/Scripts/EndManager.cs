@@ -24,8 +24,22 @@ public class EndManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<AudioManager>().Stop("theme");
+        //FindObjectOfType<AudioManager>().Stop("theme");
         FindObjectOfType<AudioManager>().Play("love theme");
+
+        //Note: this is dumb
+        AudioManager am = FindObjectOfType<AudioManager>();
+        if (am)
+        {
+            winner = am.winner;
+            loser = am.loser;
+        }
+        else {
+            Debug.LogWarning("No AM found");
+        }
+
+        textObj.SetActive(true);
+        nextButtons.SetActive(false);
 
         //Get winner/loser here
 
@@ -52,15 +66,27 @@ public class EndManager : MonoBehaviour
 
     public void Next() {
         ++state;
-        if (state >= 4) return;
-        StartCoroutine(writeString(lines[state]));
+        if (state >= 4)
+        {
+            textObj.SetActive(false);
+            nextButtons.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(writeString(lines[state]));
+        }
     }
 
     public void BackToMenu() {
+        FindObjectOfType<AudioManager>().Stop("love theme");
+        FindObjectOfType<AudioManager>().Play("theme");
         SceneManager.LoadScene("Menu");
+
     }
 
     public void BackToGame() {
+        FindObjectOfType<AudioManager>().Stop("love theme");
+        FindObjectOfType<AudioManager>().Play("theme");
         SceneManager.LoadScene("SampleScene");
     }
 }

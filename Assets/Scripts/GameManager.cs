@@ -61,17 +61,21 @@ public class GameManager : MonoBehaviour
     }
 
     void winnerPicked(int winner) {
-        FindObjectOfType<AudioManager>().Play("game win");
+        FindObjectOfType<AudioManager>().Stop("theme");
+        
         if (winner == 1)
         {
-            endText.text = "Player One Wins!";
+            FindObjectOfType<AudioManager>().winner = "Player One";
+            FindObjectOfType<AudioManager>().loser = "Player Two";
         }
         else {
-            endText.text = "Player Two Wins!";
+            FindObjectOfType<AudioManager>().winner = "Player Two";
+            FindObjectOfType<AudioManager>().loser = "Player One";
         }
-        Time.timeScale = 0;
-        endScreen.SetActive(true);
+        //Time.timeScale = 0;
+        //endScreen.SetActive(true);
         //gameActive = false;
+        SceneManager.LoadScene("EndCutscene");
     }
 
     public void pluckedby1() {

@@ -8,6 +8,9 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    public string winner = "NONE";
+    public string loser = "NONE";
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -57,6 +60,15 @@ public class AudioManager : MonoBehaviour
             print("Sound " + name + " not found");
             return;
         }
+        /*
+        if (s.source)
+        {
+            print("source found for " + name);
+        }
+        else {
+            print("source not found for " + name);
+        }
+        */
         s.source.Stop();
     }
     public void muteSound(bool muted)
