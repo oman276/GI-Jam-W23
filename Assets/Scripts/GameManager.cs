@@ -8,6 +8,8 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
 
+    endAnimation endScreenPlayer;
+
     StageGenerator stageGenerator;
 
     public float roundLength = 5f;
@@ -29,6 +31,8 @@ public class GameManager : MonoBehaviour
     AudioManager am;
     void Start()
     {
+        endScreenPlayer = FindObjectOfType<endAnimation>();
+
         am = FindObjectOfType<AudioManager>();
 
         endScreen.SetActive(false);
@@ -58,19 +62,27 @@ public class GameManager : MonoBehaviour
         }
 
         timeSlider.value = roundLength - (Time.time - prevTime);
+
+        if (endScreenPlayer.endofAnimation == true) {
+            endScreenPlayer.endofAnimation = false;
+            Time.timeScale = 0;
+        }
     }
 
     void winnerPicked(int winner) {
         FindObjectOfType<AudioManager>().Play("game win");
         if (winner == 1)
         {
+            endScreenPlayer.whichplayer = 1;
             endText.text = "Player One Wins!";
         }
         else {
+            endScreenPlayer.whichplayer = 2;
             endText.text = "Player Two Wins!";
         }
-        Time.timeScale = 0;
+        // Time.timeScale = 0;     wow this stopped everything from playing at the end
         endScreen.SetActive(true);
+        endScreenPlayer.isGameOver = true;
         //gameActive = false;
     }
 
