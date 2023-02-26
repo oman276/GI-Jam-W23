@@ -21,16 +21,21 @@ public class EndManager : MonoBehaviour
     public GameObject textObj;
     public GameObject nextButtons;
 
+    GameObject activeAnimObj;
+    public GameObject farmerWin;
+    public GameObject wolfWin;
+
     // Start is called before the first frame update
     void Start()
     {
         //FindObjectOfType<AudioManager>().Stop("theme");
-        FindObjectOfType<AudioManager>().Play("love theme");
+        //FindObjectOfType<AudioManager>().Play("love theme");
 
         //Note: this is dumb
         AudioManager am = FindObjectOfType<AudioManager>();
         if (am)
         {
+            am.Play("love theme");
             winner = am.winner;
             loser = am.loser;
         }
@@ -38,21 +43,41 @@ public class EndManager : MonoBehaviour
             Debug.LogWarning("No AM found");
         }
 
-        textObj.SetActive(true);
+        farmerWin.SetActive(false);
+        wolfWin.SetActive(false);
+
+        //textObj.SetActive(true);
         nextButtons.SetActive(false);
 
-        //Get winner/loser here
+        if (winner == "Player Two")
+        {
+            activeAnimObj = wolfWin;
+            activeAnimObj.SetActive(true);
+        }
+        else {
+            activeAnimObj = farmerWin;
+            activeAnimObj.SetActive(true);
+        }
 
         lines[0] = "Oh! " + winner + "! I didn't know you were attractored to me!";
         lines[1] = "By extractoring these roses from the ground, you have proven to be the cream of the crops!";
         lines[2] = "But " + loser + "... This is the last straw! You have been thinned from the field of competitors!";
         lines[3] = "Come, "+ winner +", my Deere! Kiss me on my large, spinning, deadly blades!";
 
+        button.SetActive(false);
+        textObj.SetActive(false);
+        //StartCoroutine(writeString(lines[0]));
+        StartCoroutine(animDelay());
+    }
+
+    public IEnumerator animDelay() {
+        yield return new WaitForSeconds(3f);
         StartCoroutine(writeString(lines[0]));
     }
 
 
     public IEnumerator writeString(string text) {
+        textObj.SetActive(true);
         button.SetActive(false);
         string targetText = "";
         mainBox.text = targetText;

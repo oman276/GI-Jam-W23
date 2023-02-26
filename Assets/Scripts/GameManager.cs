@@ -63,10 +63,13 @@ public class GameManager : MonoBehaviour
 
         timeSlider.value = roundLength - (Time.time - prevTime);
 
+        /*
         if (endScreenPlayer.endofAnimation == true) {
             endScreenPlayer.endofAnimation = false;
             Time.timeScale = 0;
         }
+        */
+        
     }
 
     void winnerPicked(int winner) {
@@ -74,16 +77,20 @@ public class GameManager : MonoBehaviour
         
         if (winner == 1)
         {
-            endScreenPlayer.whichplayer = 1;
-            endText.text = "Player One Wins!";
+            //endScreenPlayer.whichplayer = 1;
+            //endText.text = "Player One Wins!";
+            FindObjectOfType<AudioManager>().winner = "Player One";
+            FindObjectOfType<AudioManager>().loser = "Player Two";
         }
         else {
-            endScreenPlayer.whichplayer = 2;
-            endText.text = "Player Two Wins!";
+            //endScreenPlayer.whichplayer = 2;
+            //endText.text = "Player Two Wins!";
+            FindObjectOfType<AudioManager>().loser = "Player One";
+            FindObjectOfType<AudioManager>().winner = "Player Two";
         }
         // Time.timeScale = 0;     wow this stopped everything from playing at the end
-        endScreen.SetActive(true);
-        endScreenPlayer.isGameOver = true;
+        //endScreen.SetActive(true);
+        //endScreenPlayer.isGameOver = true;
         //gameActive = false;
         SceneManager.LoadScene("EndCutscene");
     }
